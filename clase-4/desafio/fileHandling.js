@@ -20,10 +20,12 @@ class Contenedor {
 
     getById = async (id) => {
         try {
-            if (!productList[id-1]){
+            const productFilter = productList.filter((product) => product.id === id);
+
+            if (productFilter.length < 1){
                 return null;
             } else {
-                console.log(productList[id-1])
+                console.log(productFilter);
             }
         } catch (err) {
             throw new Error(`Ha ocurrido un error! ${err.message}`);
@@ -40,11 +42,12 @@ class Contenedor {
 
     deleteById = async (id) => {
         try {
-            if (!productList[id-1]){
+            const productFilter = productList.filter((product) => product.id !== id);
+
+            if (productFilter.length < 1){
                 return null;
             } else {
-                const newProductList = productList.filter((product) => product.id !== id);
-                await fs.promises.writeFile(this.fileName, JSON.stringify(newProductList, null, 2),'utf-8');
+                await fs.promises.writeFile(this.fileName, JSON.stringify(productFilter, null, 2),'utf-8');
             }
         } catch (err) {
             throw new Error(`Ha ocurrido un error! ${err.message}`);
