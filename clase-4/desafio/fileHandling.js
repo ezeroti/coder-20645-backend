@@ -80,7 +80,7 @@ async function withOrder() {
         });
         await fileName.save({
             title: 'Timer NE555 DIP-8',
-            price: 322.99,
+            price: 518.50,
             thumbnail: 'https://leantec.es/wp-content/uploads/2018/02/p_1_4_9_3_1493-Timer-precision-Oscilador-555-NE555-NE555P-DIP-8.jpg'
         });
 
