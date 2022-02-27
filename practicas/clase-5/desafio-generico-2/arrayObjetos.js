@@ -7,8 +7,17 @@ const productos = [
     { id:6, nombre:'Agenda', precio:78.90 }
 ]
 
-const obtenerListaPrecios = () => { return productos.map(prod => prod.precio) }
-const obtenerNombreProductos = () => { return productos.map(prod => prod.nombre) }
+const obtenerListaPrecios = () => { return productos.map(prod => prod.precio) };
+const obtenerNombreProductos = () => { return productos.map(prod => prod.nombre) };
+const menorMayorPrecio = () => {
+    return productos.sort((a, b) => {
+        if (a.precio < b.precio) {
+            return -1
+        } else {
+            return 1
+        }
+    });
+}
 
 // Punto A
 const stringList = () => { 
@@ -27,13 +36,22 @@ const precioPromedio = () => {
 
 // Producto mayor precio
 const mayorPrecio = () => { 
-    return Math.max(...obtenerListaPrecios());
+    // una forma
+    return productos.filter((product) => product.precio === Math.max(...obtenerListaPrecios()))[0];
+
+    // segunda forma
+    // return menorMayorPrecio()[productos.length - 1];
 }
 
 // Producto mayor precio
-const menorPrecio = () => { 
-    return Math.min(...obtenerListaPrecios());
+const menorPrecio = () => {
+    // una forma
+    return productos.filter((product) => product.precio === Math.min(...obtenerListaPrecios()))[0];
+
+    // segunda forma
+    // return menorMayorPrecio()[0]
 }
+
 
 console.log({
     Productos: stringList(),
