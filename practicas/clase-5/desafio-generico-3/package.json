@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "moment": "~2.29.1" 
+  },
+  "name": "desafio-generico-3",
+  "version": "1.0.0",
+  "main": "calculadoraEdad.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
