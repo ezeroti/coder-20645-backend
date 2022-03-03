@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "getProducts.js",
-  "engine": {
+  "engines": {
     "node": "^16.14.0"
     },
   "scripts": {
