@@ -29,15 +29,14 @@ app.get('/api/letras/:num', (req, res) => {
 });
 
 app.get('/api/palabras/:num', (req, res) => {
-    const fraseWithoutSpaces = frase.split(' ');
+    const fraseToSplit = frase.split(' ');
     const num = Number(req.params.num);
 
-    if (num > fraseWithoutSpaces.length || num < 1 || isNaN(num)) { // isNaN: verifica que el valor NO sea numerico
+    if (num > fraseToSplit.length || num < 1 || isNaN(num)) {
         res.type('json');
-        return res.send([{error: 'Parametro con formato invalido o fuera de rango.'}]); // https://poopcode.com/error-err_http_headers_sent-cannot-set-headers-after-they-are-sent-to-the-client-how-to-fix/
+        return res.send([{error: 'Parametro con formato invalido o fuera de rango.'}]);
     }
 
     res.type('json');
-    // res.send([{ 'Palabra': `${fraseWithoutSpaces.charAt(num - 1)}`}]); // usando el metodo charAt
-    res.send([{ 'Palabra': `${fraseWithoutSpaces[num - 1]}`}]); // usando la posicion del string: string[1] = t
+    res.send([{ 'Palabra': `${fraseToSplit[num - 1]}`}]);
 });
