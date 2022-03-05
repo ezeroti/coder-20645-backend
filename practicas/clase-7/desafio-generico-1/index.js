@@ -15,7 +15,7 @@ app.get('/api/frase', (req, res) => {
 });
 
 app.get('/api/letras/:num', (req, res) => {
-    const fraseWithoutSpaces = frase.split(' ').join('');
+    const fraseWithoutSpaces = frase.split(' ').join(''); // output: "Holamundocomoestan"
     const num = Number(req.params.num);
 
     if (num > fraseWithoutSpaces.length || num < 1 || isNaN(num)) { // isNaN: verifica que el valor NO sea numerico
