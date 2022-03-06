@@ -1,13 +1,6 @@
-const express = require('express');
+const app = require('./sources/express.js');
 
-const app = express();
-const port = 8080;
 const frase = "Hola mundo como estan"
-
-const server = app.listen(port, () => {
-    console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
-});
-server.on("error", err => console.log(`Error en el servidor ${err}`));
 
 app.get('/api/frase', (req, res) => {
     res.type('json');
