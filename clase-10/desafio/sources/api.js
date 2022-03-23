@@ -40,13 +40,16 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const lastID = Productos[Productos.length - 1].id;
+  const lastID = () => { if (Productos.length < 1) {
+      return 0;
+    } else {
+      return Productos[Productos.length - 1].id };
+  } 
   if(!req.body['id']){
-        req.body['id'] = lastID + 1;
+        req.body['id'] = lastID() + 1;
   };
   Productos.push(req.body);
-  // res.send(req.body);
-  res.redirect('/') //redirect to home before post
+  res.redirect('/');
 });
 
 router.put('/:id', (req, res) => {
