@@ -1,0 +1,31 @@
+<div class="container-fluid d-flex justify-content-evenly p-3 m-1">
+    <h1>Productos</h1>
+</div>
+{{#if ifExists }}
+    <table class="table table-sm table-striped table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Foto</th>
+          </tr>
+        </thead>
+        <tbody>  
+        {{#each listProducts }}
+            <tr>
+              <td>{{ this.title }}</td>
+              <td>${{ this.price }}</td>
+              <td><img src={{ this.thumbnail }} alt="" border=3 height=50 width=50></img></td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <div class="alert alert-danger p-0 m-0" role="alert">
+      <h3 class="alert-heading d-flex justify-content-evenly p-3 m-1">Lo siento!</h4>
+      <h4 class="d-flex justify-content-evenly p-3 m-1">No se encontraron productos!</h4>
+    </div>
+{{/if }}
+<div class="d-flex justify-content-evenly p-3 m-1">
+    <a class="btn btn-secondary" href="http://localhost:8080/" role="button">Cargar Productos</a>
+</div>
