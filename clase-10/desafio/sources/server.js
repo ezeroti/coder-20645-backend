@@ -15,16 +15,14 @@ app.engine('hbs', handlebars.engine({
     partialsDir: 'views/partials'
 }))
 
+app.set('views', './views');
 // hbs
-// app.set('views', './views')
 // app.set('view engine', 'hbs')
 
 // pug
-// app.set('views', './views');
 // app.set('view engine', 'pug');
 
 // ejs
-app.set('views', './views');
 app.set('view engine', 'ejs');
 
 const server = app.listen(port, () => {
