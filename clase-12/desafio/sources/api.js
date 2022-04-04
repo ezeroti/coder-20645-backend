@@ -1,5 +1,5 @@
-const { router, app } = require('./server.js');
-const Productos = require('./products.js');
+const { router, app, io } = require('./server.js');
+const { Productos } = require('./products.js');
 
 const checkIndex = (index) => { if (Productos.find(prod => prod.id === index)) { return false } else { return true } };
 const findIndex = (num) => { return Productos.findIndex(prodIndex => prodIndex.id === num) };
@@ -29,7 +29,6 @@ router.post('/', (req, res) => {
         req.body['id'] = lastID() + 1;
   };
   Productos.push(req.body);
-  res.redirect('/');
 });
 
 router.put('/:id', (req, res) => {
@@ -57,7 +56,7 @@ router.delete('/:id', (req, res) => {
   res.send({info: 'DELETE OK'});
 });
 
-// app.get('/', (req, res) => {
-//   const amount = () => {if (Productos.length < 1) { return false } else { return true }};
-//   res.render('main', { listProducts: Productos, ifExists: amount() });
-// });
+app.get('/', (req, res) => {
+  const amount = () => {if (Productos.length < 1) { return false } else { return true }};
+  res.render('index', { listProducts: Productos, ifExists: amount() });
+});

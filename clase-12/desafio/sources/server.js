@@ -1,9 +1,9 @@
-const Productos = require('./products.js');
+const { Productos } = require('./products.js');
 const express = require('express');
 const { Router } = express;
-const handlebars = require('express-handlebars');
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
+const request = require('request');
 
 const app = express();
 const router = Router();
@@ -13,27 +13,33 @@ const port = 8080;
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
-app.engine('hbs', handlebars.engine({
-    extname: '.hbs',
-    defaultLayout: 'index.hbs',
-    layoutsDir: 'views/layouts',
-    partialsDir: 'views/partials'
-}))
-
 app.set('views', './views');
-app.set('view engine', 'hbs')
+app.set('view engine', 'ejs')
 
 const server = httpServer.listen(port, () => {
     console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
 });
 server.on("error", err => console.log(`Error en el servidor ${err}`));
 
+// const ProductosApi = () => {
+//     request('http://localhost:8080/api/productos', { json: true }, (err, res, body) => {
+//         if (err) { return console.log(err); }
+//         body.forEach(element => {
+//              console.log(element);
+//         });
+//       });
+//     }
+
 app.use('/api/productos', router);
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
       console.log('Usuario conectado');
-      socket.emit("messages", Productos);
+
+      socket.on("new-product", (data) => {
+        Productos.push(data);
+        io.sockets.emit("productList", data);
+      });
 })
   
-module.exports = { router, app };
+module.exports = { router, app, io }

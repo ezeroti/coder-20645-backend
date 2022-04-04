@@ -19,4 +19,4 @@ const Productos = [
     }
 ];
 
-module.exports = Productos;
+module.exports = { Productos };
