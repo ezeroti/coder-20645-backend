@@ -1,20 +1,23 @@
 const socket = io();
 
 socket.on('productList', function(data) { 
-    var tbodyRef = document.getElementById('addProduct')
-        
-    var newRow = tbodyRef.insertRow();
-    var newCellTitle = newRow.insertCell();
-    var newCellPrice = newRow.insertCell();
-    var newCellThumbnail = newRow.insertCell();
+    const tbodyRef = document.getElementById('addProduct')
+    const img = document.createElement('img');
 
-    var newTextTitle = document.createTextNode(data.title);
-    var newTextPrice = document.createTextNode(data.price);
-    var newTextThumbnail = document.createTextNode(data.thumbnail);
-    
+    const newRow = tbodyRef.insertRow();
+    const newCellTitle = newRow.insertCell();
+    const newCellPrice = newRow.insertCell();
+    const newCellThumbnail = newRow.insertCell();
+
+    const newTextTitle = document.createTextNode(data.title);
+    const newTextPrice = document.createTextNode(`$${data.price}`);
+    img.src = data.thumbnail;
+    img.style.height = "50px"
+    img.style.width = "50px"
+
     newCellTitle.appendChild(newTextTitle);
     newCellPrice.appendChild(newTextPrice);
-    newCellThumbnail.appendChild(newTextThumbnail);
+    newCellThumbnail.appendChild(img);
  });
 
 function addProduct(e) {

@@ -3,7 +3,6 @@ const express = require('express');
 const { Router } = express;
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
-const request = require('request');
 
 const app = express();
 const router = Router();
@@ -20,15 +19,6 @@ const server = httpServer.listen(port, () => {
     console.log(`Servidor http escuchando en el puerto ${server.address().port}`);
 });
 server.on("error", err => console.log(`Error en el servidor ${err}`));
-
-// const ProductosApi = () => {
-//     request('http://localhost:8080/api/productos', { json: true }, (err, res, body) => {
-//         if (err) { return console.log(err); }
-//         body.forEach(element => {
-//              console.log(element);
-//         });
-//       });
-//     }
 
 app.use('/api/productos', router);
 app.use(express.static('public'));
