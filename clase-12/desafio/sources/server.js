@@ -37,14 +37,6 @@ io.on('connection', (socket) => {
   socket.emit("messages", Mensajes);
 
   socket.on("checkData", (data) => {
-    // Simple check con include
-    // if (data.email.includes("@")) {
-    //   Mensajes.push(data);
-    //   io.sockets.emit("messages", Mensajes);
-    // } else {
-    //   return false;
-    // }
-
     // Usando una regex
     const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (data.email.match(regexEmail)) {
@@ -54,6 +46,15 @@ io.on('connection', (socket) => {
     } else {
       return false; 
     }
+
+    // Simple check con include
+    // if (data.email.includes("@")) {
+    // data.date = moment().format("DD/MM/YYYY hh:mm:ss");
+    // Mensajes.push(data);
+    // io.sockets.emit("messages", Mensajes);
+    // } else {
+    //   return false;
+    // }
   });
 })
 
