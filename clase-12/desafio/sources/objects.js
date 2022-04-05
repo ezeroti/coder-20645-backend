@@ -1,7 +1,7 @@
 const Mensajes = [
     { 
       "email": "Boot@local", 
-      "text": "Hola!",
+      "text": "Bienvenido al sistema de chat!",
       "date": "running..."
     },
 ];
