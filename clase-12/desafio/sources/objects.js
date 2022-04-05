@@ -1,3 +1,11 @@
+const Mensajes = [
+    { 
+      "email": "Boot@local", 
+      "text": "Hola!",
+      "date": "running..."
+    },
+];
+
 const Productos = [
     {
       "title": "Capacitor Electrolitico - 1000mF x 25V",
@@ -19,4 +27,4 @@ const Productos = [
     }
 ];
 
-module.exports = { Productos };
+module.exports = { Productos, Mensajes };

@@ -1,8 +1,9 @@
-const { Productos } = require('./products.js');
+const { Productos, Mensajes } = require('./objects.js');
 const express = require('express');
 const { Router } = express;
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
+const moment = require('moment');
 
 const app = express();
 const router = Router();
@@ -24,12 +25,36 @@ app.use('/api/productos', router);
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
-      console.log('Usuario conectado');
+  console.log('Usuario conectado');
 
-      socket.on("new-product", (data) => {
-        Productos.push(data);
-        io.sockets.emit("productList", data);
-      });
+  socket.on("new-product", (data) => {
+    Productos.push(data);
+    io.sockets.emit("productList", data);
+  });
 })
-  
-module.exports = { router, app, io }
+
+io.on('connection', (socket) => {
+  socket.emit("messages", Mensajes);
+
+  socket.on("checkData", (data) => {
+    // Simple check con include
+    // if (data.email.includes("@")) {
+    //   Mensajes.push(data);
+    //   io.sockets.emit("messages", Mensajes);
+    // } else {
+    //   return false;
+    // }
+
+    // Usando una regex
+    const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (data.email.match(regexEmail)) {
+      data.date = moment().format("DD/MM/YYYY hh:mm:ss");
+      Mensajes.push(data);
+      io.sockets.emit("messages", Mensajes);
+    } else {
+      return false; 
+    }
+  });
+})
+
+module.exports = { router, app }

@@ -1,5 +1,5 @@
-const { router, app, io } = require('./server.js');
-const { Productos } = require('./products.js');
+const { router, app } = require('./server.js');
+const { Productos } = require('./objects.js');
 
 const checkIndex = (index) => { if (Productos.find(prod => prod.id === index)) { return false } else { return true } };
 const findIndex = (num) => { return Productos.findIndex(prodIndex => prodIndex.id === num) };
