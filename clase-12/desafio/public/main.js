@@ -33,9 +33,10 @@ function addProduct(e) {
 socket.on('messages', function(data) { 
     const html = data.map(elem => {
         return(`<div>
-            <strong style="color: CornflowerBlue">${elem.email}</strong> 
+            <span style="color: CornflowerBlue; font-weight: bold">${elem.email}</span> 
             <span style="color: Brown">[${elem.date}]</span> : 
-            <em style="color: green; font-style: italic">${elem.text}</em> </div>`)
+            <span style="color: green; font-style: italic">${elem.text}</span> 
+            </div>`)
         }).join(" ");
     document.getElementById('messages').innerHTML = html;
 });

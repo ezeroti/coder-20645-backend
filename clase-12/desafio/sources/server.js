@@ -4,6 +4,7 @@ const { Router } = express;
 const { Server: HttpServer } = require("http");
 const { Server: IOServer } = require("socket.io");
 const moment = require('moment');
+const fs = require('fs');
 
 const app = express();
 const router = Router();
@@ -43,6 +44,7 @@ io.on('connection', (socket) => {
       data.date = moment().format("DD/MM/YYYY hh:mm:ss");
       Mensajes.push(data);
       io.sockets.emit("messages", Mensajes);
+      fs.writeFileSync('mensajesChat.json', JSON.stringify(Mensajes, null, 2),'utf-8');
     } else {
       return false; 
     }
