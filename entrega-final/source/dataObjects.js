@@ -1,7 +1,7 @@
 const Productos = [
     {
       "id": 1,
-      "timestamp": "10.04.2022@10:10:10",
+      "timestamp": "10.04.2022@10.10.10",
       "nombre": "Capacitor Electrolitico",
       "descripcion": "Capacitor Electrolitico - 1000mF x 25V",
       "codigo": "AAAA",
@@ -11,7 +11,7 @@ const Productos = [
     },
     {
       "id": 2,
-      "timestamp": "10.04.2022@10:11:10",
+      "timestamp": "10.04.2022@10.11.10",
       "nombre": "Regulador de tension LM7818",
       "descripcion": "Regulador de tension LM7818 - 18V x 1.5A",
       "codigo": "BBBB",
@@ -21,7 +21,7 @@ const Productos = [
     },
     {
       "id": 3,
-      "timestamp": "10.04.2022@10:12:10",
+      "timestamp": "10.04.2022@10.12.10",
       "nombre": "Timer",
       "descripcion": "Timer NE555 DIP-8",
       "codigo": "CCCC",

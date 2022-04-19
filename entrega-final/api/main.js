@@ -7,9 +7,9 @@ const fs = require('fs');
 
 const checkIndex = (index,obj) => { if (obj.find(item => item.id === index)) { return false } else { return true } };
 const findIndex = (index,obj) => { return obj.findIndex(objIndex => objIndex.id === index) };
-const getTimestamp = () => { return moment().format("DD.MM.YYYY@hh:mm:ss") };
+const getTimestamp = () => { return moment().format("DD.MM.YYYY@hh.mm.ss") };
 const isPathNotExist = (req, res) => {res.status(404).send({ 'error' : -2, 'descripcion': `ruta ${req.baseUrl + req.path} método ${req.method} no implementado` });};
-const persistentData = (obj,fileName) => { fs.writeFileSync(`${fileName}.json`, JSON.stringify(obj, null, 2),'utf-8') }
+const persistentData = (obj,fileName) => { fs.writeFileSync(`${fileName}.datafile`, JSON.stringify(obj, null, 2),'utf-8') }
 const lastID = (obj) => { if (obj.length < 1) {
   return 0;
 } else {
@@ -43,7 +43,7 @@ prod.post('/', isAdmin, (req, res) => {
         req.body['id'] = lastID(Productos) + 1;
   };
   Productos.push(req.body);
-  persistentData(Productos,'prodData');
+  persistentData(Productos,'products');
   res.send({info: 'POST OK'});
 });
 
@@ -97,7 +97,7 @@ cart.post('/:id?/:path?/:idProd?', (req, res) => {
     if(path === 'productos' && idProd){
       if(!checkIndex(id,Carritos)){
         Carritos[id - 1].productos.push(Productos[idProd - 1]);
-        persistentData(Carritos,'cartData');
+        persistentData(Carritos,'carts');
         res.send({info: 'POST OK'});
       } else {
         return res.send({error: 'Carrito no encontrado.'});
@@ -123,7 +123,7 @@ cart.delete('/:id?/:path?/:idProd?', (req, res) => {
         return res.send({error: 'Producto no encontrado.'});
       } else {
         cartProdIndex.splice(findIndex(idProd,cartProdIndex), 1);
-        persistentData(Carritos,'cartData');
+        persistentData(Carritos,'carts');
         res.send({info: 'DELETE OK'});
       } 
     } else if (checkIndex(id,Carritos)){
