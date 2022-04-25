@@ -1,0 +1,25 @@
+<% if (ifExists) { %>
+    <table id="addProduct" class="table table-sm table-striped table-bordered table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Foto</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% listProducts.forEach(function(products) { %>
+                <tr>
+                  <td><%=products.title%></td>
+                  <td>$<%=products.price%></td>
+                  <td><img src=<%=products.thumbnail%> alt="" height=50 width=50></img></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+  <% } else { %>
+    <div class="alert alert-danger p-0 m-0" role="alert">
+      <h3 class="alert-heading d-flex justify-content-evenly p-3 m-1">Lo sentimos!</h4>
+      <h4 class="d-flex justify-content-evenly p-3 m-1">No se encontraron productos!</h4>
+    </div>
+<% } %>
