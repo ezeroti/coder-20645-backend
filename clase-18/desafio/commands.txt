@@ -1,0 +1,48 @@
+
+// Inserto productos
+db.productos.insertMany([{"title": "Capacitor Electrolitico - 1000mF x 25V", "price": 120, "thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_1_6_7_7_1677-Condensador-electrolitico-1000uF-25V.jpg", "id": 1}, {"title": "Regulador de tension LM7818 - 18V x 1.5A", "price": 322, "thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_1_4_6_7_1467-Regulador-tension-L7818CV-LM7818-7818-18V-1.5A-TO-220.jpg", "id": 2}, {"title": "Timer NE555 DIP-8", "price": 518, "thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_1_4_9_3_1493-Timer-precision-Oscilador-555-NE555-NE555P-DIP-8.jpg", "id": 3}, {"title": "MODULO ARDUINO RELOJ DE PRECISION DS3231","price": 1000,"thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_1_3_5_1_1351-Modulo-Arduino-reloj-de-precision-DS3231-CON-PILA-AT24C32-IIC.jpg","id": 4}, {"title": "10A10 DIODO RECTIFICADOR 10A 1000V","price": 147,"thumbnail": "https://leantec.es/wp-content/uploads/2018/10/p_3_5_0_4_3504-10A10-Diodo-rectificador-10A-1000V.jpg","id": 5}, {"title": "DIODOS LED 5MM","price": 233,"thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_3_4_8_2_3482-10-Diodos-led-5mm.jpg","id": 6}, {"title": "BUZZER PASIVO 3 A 12VDC","price": 400,"thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_1_5_2_1_1521-Zumbador-Buzzer-pasivo-3-a-12Vdc-Electronica-arduino-prototipos.jpg","id": 7}, {"title": "ZOCALO INTEGRADO SOCKET 16PINS DIP16","price": 150,"thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_1_5_1_9_1519-Zocalo-integrado-Socket.jpg","id": 8}, {"title": "VOLTIMETRO AMPERIMETRO 100V 50A DIGITAL DC","price": 4100,"thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_1_5_1_3_1513-Voltimetro-Amperimetro-100V-50A-Digital-DC-Rojo-Azul.jpg","id": 9}, {"title": "TRANSISTOR NPN PN2222A 2N2222A","price": 2000,"thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_1_9_4_0_1940-Transistor-NPN-PN2222A-2N2222A-Blister-Electronica-Arduino-Prototipos.jpg","id": 10}])
+
+// Inserto mensajes
+db.mensajes.insertMany([{"email": "Boot@local", "text": "Bienvenido al sistema de chat!", "date": "running..."},{"email": "eze@local", "text": "Buenos dias!", "date": "10:15:30"},{"email": "fede@local", "text": "Buenas tardes!", "date": "10:15:35"},{"email": "mica@local", "text": "Buenas noches!", "date": "10:15:40"},{"email": "carli@local", "text": "Buenos dias!!", "date": "10:15:45"},{"email": "abril@local", "text": "Buenas tardes!", "date": "10:15:50"},{"email": "noelia@local", "text": "Buenas noches!", "date": "10:15:55"},{"email": "esteban@local", "text": "Buenas dias!", "date": "10:16:00"},{"email": "jorge@local", "text": "Buenas tardes!", "date": "10:16:05"},{"email": "ludmila@local", "text": "Buenas noches!", "date": "10:16:10"}])
+
+// Listo los productos
+db.productos.find().pretty()
+
+// listo los mensajes
+db.mensajes.find().pretty()
+
+// Cantidad de documentos en coleccion productos
+db.productos.estimatedDocumentCount()
+
+// cantidad de documentos en coleccion mensajes
+db.mensajes.estimatedDocumentCount()
+
+// Inserto un producto mas
+db.productos.insert({"title": "PULSADOR ROJO REDONDO 12MM", "price": 410, "thumbnail": "https://leantec.es/wp-content/uploads/2018/02/p_1_4_5_3_1453-PULSADOR-ROJO-redondo-12mm-empotrable-boton-ON-OFF-2-posiciones.jpg", "id": 11})
+
+// Realizo consulta por nombre de producto especifico
+db.productos.findOne({"title": "ZOCALO INTEGRADO SOCKET 16PINS DIP16"})
+
+// Listo los productos con precio menor a 1000
+db.productos.find({"price": {$lt: 1000}}).pretty()
+
+// Productos entre 1000 y 3000
+db.productos.find({"price": {$in: [1000, 3000]}}).pretty()
+
+// Productos mayor a 3000
+db.productos.findOne({"price": {$gt: 3000}})
+
+// Traigo solo el nombre del tercer producto mas barato
+db.productos.find({},{title:1,"_id":0}).sort({"price":1}).limit(1).skip(2).pretty()
+
+// Agrego stock=100 a todos los productos
+db.productos.updateMany({},{$set: {"stock": 100}})
+
+// Cambio stock=0 a productos mayores a 4000 pesos
+db.productos.update({"price": {$gt: 4000}}, {$set: {"stock": 0}})
+
+// Elimino productos menos a 1000 pesos
+db.productos.deleteMany({"price": {$lt: 1000}})
+
+// Creo un usuario RO para la db ecommerce
+db.createUser({"user": "pepe", "pwd": "asd456", "roles": [{role: "read", db: "ecommerce"}]})
