@@ -30,7 +30,7 @@ db.productos.find({"price": {$lt: 1000}}).pretty()
 db.productos.find({"price": {$in: [1000, 3000]}}).pretty()
 
 // Productos mayor a 3000
-db.productos.findOne({"price": {$gt: 3000}})
+db.productos.find({"price": {$gt: 3000}})
 
 // Traigo solo el nombre del tercer producto mas barato
 db.productos.find({},{title:1,"_id":0}).sort({"price":1}).limit(1).skip(2).pretty()
